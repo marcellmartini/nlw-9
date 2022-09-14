@@ -1,0 +1,23 @@
+---
+- name: Get nodesource setup_lts.x shell script
+  get_url:
+    url: https://deb.nodesource.com/setup_lts.x
+    dest: /tmp/setup_lts_x.sh
+    mode: "0700"
+
+- name: Add node.js PPA
+  become: true
+  ansible.builtin.shell: /tmp/setup_lts_x.sh >> /tmp/somelog.txt
+
+- name: Apt upgrade
+  become: true
+  ansible.builtin.apt:
+    upgrade: "yes"
+
+- name: Install node.js
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+    pkg:
+      - nodejs
+    state: present
