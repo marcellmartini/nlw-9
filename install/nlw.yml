@@ -1,0 +1,15 @@
+---
+#- hosts: local
+# se quiser instalar localmetne descomente a linha a cima e comente a linha abaixo
+- hosts: virtualbox
+  remote_user: ubuntu
+
+  pre_tasks:
+    - include_tasks: pre_tasks.yml
+
+  vars:
+    - ansible_become_password: '{{ lookup("env", "ANSIBLE_BECOME_PASSWORD") }}'
+
+  roles:
+    - node
+    - expo
