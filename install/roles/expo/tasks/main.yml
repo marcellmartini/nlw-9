@@ -1,0 +1,6 @@
+---
+- name: Install "expo" node.js package globally.
+  become: true
+  npm:
+    name: expo-cli
+    global: yes
